@@ -1,19 +1,58 @@
 #!/usr/bin/env python3
 
-def garden_operations(test_str: str) -> None:
-    try:
-        pass
-    except ValueError as e:
-        print(f"Caught ValueError: {e}")
+def garden_operations(mode: int, test_str: str, test_dict: dict) -> None:
+    """Execute the operations that will raise exceptions.
+
+    Args:
+        mode: The exception to be tested
+        test_str: The string that leads to an exception
+        test_dict: The dict that leads to an exception
+    """
+    if mode == 0:
+        int(test_str)
+    if mode == 1:
+        1 / int(test_str)
+    if mode == 2:
+        open(test_str, "r")
+    if mode == 3:
+        test_dict[test_str]
 
 
 def test_error_types() -> None:
-    garden_operations("abc")
+    """Test and output exceptions."""
+    test_dict = {"a": "A", "b": "B", "c": "C"}
+    print("\nTesting ValueError...")
+    try:
+        garden_operations(0, "abc", test_dict)
+    except ValueError as e:
+        print(f"Caught ValueError: {e}")
+    print("\nTesting ZeroDivisionError...")
+    try:
+        garden_operations(1, "0", test_dict)
+    except ZeroDivisionError as e:
+        print(f"Caught ZeroDivisionError: {e}")
+    print("\nTesting FileNotFoundError...")
+    try:
+        garden_operations(2, "missing.txt", test_dict)
+    except FileNotFoundError as e:
+        print(f"Caught FileNotFoundError: {e}")
+    print("\nTesting KeyError...")
+    try:
+        garden_operations(3, "missing_plant", test_dict)
+    except KeyError as e:
+        print(f"Caught KeyError: {e}")
+    print("\nTesting multiple errors together...")
+    try:
+        garden_operations(0, "abc", test_dict)
+    except (ValueError, ZeroDivisionError, FileNotFoundError, KeyError):
+        print("Caught an error, but program continues!")
 
 
 def main() -> None:
     """Run the main program."""
+    print("=== Garden Error Types Demo ===")
     test_error_types()
+    print("\nAll error types tested successfully!")
 
 
 if __name__ == "__main__":
