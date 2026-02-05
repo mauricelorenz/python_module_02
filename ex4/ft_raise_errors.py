@@ -12,11 +12,16 @@ def check_plant_health(plant_name: str, water_level: int,
     try:
         if plant_name == "":
             raise ValueError("Plant name cannot be empty!")
-        elif water_level < 1 or water_level > 10:
+        elif water_level < 1:
+            raise ValueError(f"Water level {water_level} is too low (min 1)")
+        elif water_level > 10:
             raise ValueError(f"Water level {water_level} is too high (max 10)")
-        elif sunlight_hours < 2 or sunlight_hours > 12:
+        elif sunlight_hours < 2:
             raise ValueError(f"Sunlight hours {sunlight_hours} "
                              "is too low (min 2)")
+        elif sunlight_hours > 12:
+            raise ValueError(f"Sunlight hours {sunlight_hours} "
+                             "is too high (max 12)")
     except ValueError as e:
         print(f"Error: {e}\n")
         return
