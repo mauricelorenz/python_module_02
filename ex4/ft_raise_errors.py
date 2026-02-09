@@ -8,8 +8,10 @@ def check_plant_health(plant_name: str, water_level: int,
         plant_name: The name of the plant
         water_level: The current water level
         sunlight_hours: The hours of sunlight exposure
+
     Returns:
         A message that the plant is healthy, if so
+
     Raises:
         ValueError: If water level or sunlight hours are out of bounds
     """
