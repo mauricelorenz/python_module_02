@@ -7,14 +7,21 @@ def garden_operations(mode: int, test_str: str, test_dict: dict) -> None:
         mode: The exception to be tested
         test_str: The string that leads to an exception
         test_dict: The dict that leads to an exception
+
+    Raises:
+        ValueError: If int() gets called on non-numeric value
+        ZeroDivisionError: If passed value is zero
+        FileNotFoundError: If file does not exist
+        KeyError: If passed key does not exist in passed dict
     """
     if mode == 0:
         int(test_str)
-    if mode == 1:
+    elif mode == 1:
         1 / int(test_str)
-    if mode == 2:
-        open(test_str, "r")
-    if mode == 3:
+    elif mode == 2:
+        f = open(test_str, "r")
+        f.close()
+    elif mode == 3:
         test_dict[test_str]
 
 
