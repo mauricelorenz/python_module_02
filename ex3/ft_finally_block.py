@@ -6,8 +6,8 @@ def water_plants(plant_list: list) -> None:
     Args:
         plant_list: the plants to water
     """
-    error_occured = 0
     print("Opening watering system")
+    error_occured = 0
     try:
         for plant in plant_list:
             if plant is None:
